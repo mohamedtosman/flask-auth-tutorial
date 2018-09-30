@@ -71,7 +71,10 @@ In a shell, set they key as a secret key environment variable
 Run the following command to execute the unit tests found in flask-jwt-auth\project\tests\test_auth.py
 '(env)$ python manage.py test'
 
-You should the following output for a total of 25 tests
+## Running the Application
+'(env) $ python manage.py runserver'
+
+## Testing
 '''
 (env)$ python manage.py test
 test_app_is_development (project.tests.test__config.TestDevelopmentConfig) ... ok
@@ -126,13 +129,96 @@ Ran 25 tests in 18.614s
 OK
 '''
 
+## API Documentations
+**POST: /auth/register**
+Register a new user using email and password
+
+Parameters:
+'''
+email
+password
+'''
+
+**POST: /auth/login**
+Login using email and password
+
+Parameters:
+'''
+email - string
+password - string
+'''
+
+**GET: /auth/account**
+Get status of the currently logged in user
+
+**POST: /auth/logout**
+Logout from current session
+
+Parameters:
+'''
+email - string
+password - string
+'''
+
+**POST: /auth/products**
+Add new product to product database using code, type, and quantity
+
+Parameters:
+'''
+code - string
+type - string
+quantity - integer
+'''
+
+**GET: /auth/inventory**
+Get single product by passing in it's code or multiple product types by passing in a type
+
+Header:
+'''
+code - string
+'''
+
+OR
+
+Headers:
+'''
+type - string
+'''
+
+**PUT: /auth/inventory**
+Edit product in the inventory
+
+Headers:
+'''
+code - string
+newcode - string
+'''
+
+**DELETE: /auth/inventory**
+Delete product in inventory
+
+Headers:
+'''
+code - string
+newcode - string
+'''
+
 ## Questions
 1. Please explain your choice of technologies.
+To be honest, I have never done something like this before. I was learning while working on this task. As I am a huge fan of Python, I chose to develop using Python. Using my bestfriend google, I was able to understand as much as possible about REST, JWT, PSQL, tokens and much more in less than 2 days.
 
 2. What is the difference between PUT and POST methods?
+PUT puts data to a specific URI. If there is already data there, then PUT replaces that data with the data in the request. If there is not data in the URI, then PUT creates one.
+
+POST sends data to a specific URI for it to handle the request
+
+Ultimately, PUT is used as an edit for most cases, while POST is used to send data.
 
 3. What approaches would you apply to make your API responding fast?
+I could try using multiprocessing. Python has a multiprocessing module that could be useful for that.
 
 4. How would you monitor your API?
+I would monitor my API by always enhancing my test cases and finding new technologies that allows a faster response time, etc. With a simple google search, I also found out that there are tons of API monitoring tools that could be useful for that.
 
 5. Which endpoints from the task could by publically cached?
+/auth/inventory endpoint can be cached to to allow for faster results when searching for the same product again.

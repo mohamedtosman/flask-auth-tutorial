@@ -13,15 +13,28 @@ class RegisterAPI(MethodView):
     User Registration Resource
     """
     def post(self):
-        # get the post data
-        post_data = request.get_json()
-        # check if user already exists
-        user = User.query.filter_by(email=post_data.get('email')).first()
+        # Needed to add this check due to change in request type.
+        # When running unit tests, requests come in as a dict
+        # However, in server mode, requests come in as ImmutableMultiDict
+        if type(request.get_json()) is dict:
+            post_data = request.get_json()
+            user = User.query.filter_by(email=post_data.get('email')).first()
+            email=post_data.get('email')
+            password=post_data.get('password')
+
+        else:
+            # get the post data
+            post_data = (request.get_json() or request.form).to_dict(flat=False)
+            # check if user already exists
+            user = User.query.filter_by(email=post_data.get('email')[0]).first()
+            email=post_data.get('email')[0],
+            password=post_data.get('password')[0]
+        
         if not user:
             try:
                 user = User(
-                    email=post_data.get('email'),
-                    password=post_data.get('password')
+                    email=email,
+                    password=password
                 )
 
                 # insert the user
@@ -53,15 +66,30 @@ class LoginAPI(MethodView):
     User Login Resource
     """
     def post(self):
-        # get the post data
-        post_data = request.get_json()
+        # Needed to add this check due to change in request type.
+        # When running unit tests, requests come in as a dict
+        # However, in server mode, requests come in as ImmutableMultiDict
+        if type(request.get_json()) is dict:
+            post_data = request.get_json()
+            user = User.query.filter_by(email=post_data.get('email')).first()
+            email=post_data.get('email')
+            password=post_data.get('password')
+
+        else:
+            # get the post data
+            post_data = (request.get_json() or request.form).to_dict(flat=False)
+            # check if user already exists
+            user = User.query.filter_by(email=post_data.get('email')[0]).first()
+            email=post_data.get('email')[0],
+            password=post_data.get('password')[0]
+
         try:
             # fetch the user data
             user = User.query.filter_by(
-                email=post_data.get('email')
+                email=email
             ).first()
             if user and bcrypt.check_password_hash(
-                user.password, post_data.get('password')
+                user.password, password
             ):
                 auth_token = user.encode_auth_token(user.id)
                 if auth_token:
@@ -179,17 +207,31 @@ class ProductAPI(MethodView):
     Product Resource
     """
     def post(self):
-        # get the auth token
-        # get the post data
-        post_data = request.get_json()
-        # check if product already exists
-        product = Products.query.filter_by(code=post_data.get('code')).first()
+        # Needed to add this check due to change in request type.
+        # When running unit tests, requests come in as a dict
+        # However, in server mode, requests come in as ImmutableMultiDict
+        if type(request.get_json()) is dict:
+            post_data = request.get_json()
+            product = Products.query.filter_by(code=post_data.get('code')).first()
+            code=post_data.get('code')
+            ProductType=post_data.get('type')
+            quantity=post_data.get('quantity')
+
+        else:
+            # get the post data
+            post_data = (request.get_json() or request.form).to_dict(flat=False)
+            # check if user already exists
+            product = Products.query.filter_by(code=post_data.get('code')[0]).first()
+            code=post_data.get('code')[0]
+            ProductType=post_data.get('type')[0],
+            quantity=post_data.get('quantity')[0]
+
         if not product:
             try:
                 product = Products(
-                	code = post_data.get('code'),
-                    type=post_data.get('type'),
-                    quantity=post_data.get('quantity')
+                	code = code,
+                    type= ProductType,
+                    quantity= quantity
                 )
 
                 # insert the product

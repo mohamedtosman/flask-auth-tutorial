@@ -9,36 +9,38 @@ and password.
 
 ## Prerequisites
 Python3.x
+
 Psql
 
 ## Instructions
 Clone the repo
-'$ git clone https://github.com/mohamedtosman/home24.git'
+` $ git clone https://github.com/mohamedtosman/home24.git `
+
 Activate a virtual environment
-'''
+```
 $ cd flask-jwt-auth/
 $ python -m venv env
 $ source env/Scripts/activate
-'''
+```
 
 Install dependencies
-'(env)$ pip install -r requirements.txt'
+`(env)$ pip install -r requirements.txt`
 
 Create databases (You need to have psql installed)
-'''
+```
 (env)$ psql
 # create database flask_jwt_auth;
 CREATE DATABASE
 # create database flask_jwt_auth_test;
 CREATE DATABASE
 # \q
-'''
+```
 
 Set environment variables in terminal:
-'(env)$ export APP_SETTINGS="project.server.config.DevelopmentConfig"'
+`(env)$ export APP_SETTINGS="project.server.config.DevelopmentConfig"`
 
 Confirm you see the following in psql
-'''
+```
 postgres=# \c flask_jwt_auth
 WARNING: Console code page (437) differs from Windows code page (1252)
          8-bit characters might not work correctly. See psql reference
@@ -56,26 +58,26 @@ flask_jwt_auth=# \d
  public | users                   | table    | postgres
  public | users_id_seq            | sequence | postgres
 (7 rows)
-'''
+```
 
 In a python shell, generate a random key
-'''
+```
 >>> import os
 >>> os.urandom(24)
 b"C~\xf8\xb2\x9e\xf7=3\xfb\x85\xc3=-\xa8Y}+[Rx)\xbb9\x0c"
-'''
+```
 
 In a shell, set they key as a secret key environment variable
-'(env)$ export SECRET_KEY="C~\xf8\xb2\x9e\xf7=3\xfb\x85\xc3=-\xa8Y}+[Rx)\xbb9\x0c"'
+`(env)$ export SECRET_KEY="C~\xf8\xb2\x9e\xf7=3\xfb\x85\xc3=-\xa8Y}+[Rx)\xbb9\x0c"`
 
 Run the following command to execute the unit tests found in flask-jwt-auth\project\tests\test_auth.py
-'(env)$ python manage.py test'
+`(env)$ python manage.py test`
 
 ## Running the Application
-'(env) $ python manage.py runserver'
+`(env) $ python manage.py runserver`
 
 ## Testing
-'''
+```
 (env)$ python manage.py test
 test_app_is_development (project.tests.test__config.TestDevelopmentConfig) ... ok
 test_app_is_production (project.tests.test__config.TestProductionConfig) ... ok
@@ -127,26 +129,26 @@ test_encode_auth_token (project.tests.test_user_model.TestUserModel) ... ok
 Ran 25 tests in 18.614s
 
 OK
-'''
+```
 
 ## API Documentations
 **POST: /auth/register**
 Register a new user using email and password
 
 Parameters:
-'''
+```
 email
 password
-'''
+```
 
 **POST: /auth/login**
 Login using email and password
 
 Parameters:
-'''
+```
 email - string
 password - string
-'''
+```
 
 **GET: /auth/account**
 Get status of the currently logged in user
@@ -155,53 +157,53 @@ Get status of the currently logged in user
 Logout from current session
 
 Parameters:
-'''
+```
 email - string
 password - string
-'''
+```
 
 **POST: /auth/products**
 Add new product to product database using code, type, and quantity
 
 Parameters:
-'''
+```
 code - string
 type - string
 quantity - integer
-'''
+```
 
 **GET: /auth/inventory**
-Get single product by passing in it's code or multiple product types by passing in a type
+Get single product by passing in it`s code or multiple product types by passing in a type
 
 Header:
-'''
+```
 code - string
-'''
+```
 
 OR
 
 Headers:
-'''
+```
 type - string
-'''
+```
 
 **PUT: /auth/inventory**
 Edit product in the inventory
 
 Headers:
-'''
+```
 code - string
 newcode - string
-'''
+```
 
 **DELETE: /auth/inventory**
 Delete product in inventory
 
 Headers:
-'''
+```
 code - string
 newcode - string
-'''
+```
 
 ## Questions
 1. Please explain your choice of technologies.

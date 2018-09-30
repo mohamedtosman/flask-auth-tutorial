@@ -218,11 +218,11 @@ newcode - string
 ```
 
 ## Questions
-1. Please explain your choice of technologies.
+**1. Please explain your choice of technologies.**
 
 To be honest, I have never done something like this before. I was learning while working on this task. As I am a huge fan of Python, I chose to develop using Python. Using my bestfriend google, I was able to understand as much as possible about REST, JWT, PSQL, tokens and much more in less than 2 days.
 
-2. What is the difference between PUT and POST methods?
+**2. What is the difference between PUT and POST methods?**
 
 PUT puts data to a specific URI. If there is already data there, then PUT replaces that data with the data in the request. If there is not data in the URI, then PUT creates one.
 
@@ -230,14 +230,14 @@ POST sends data to a specific URI for it to handle the request
 
 Ultimately, PUT is used as an edit for most cases, while POST is used to send data.
 
-3. What approaches would you apply to make your API responding fast?
+**3. What approaches would you apply to make your API responding fast?**
 
 I could try using multiprocessing. Python has a multiprocessing module that could be useful for that.
 
-4. How would you monitor your API?
+**4. How would you monitor your API?**
 
 I would monitor my API by always enhancing my test cases and finding new technologies that allows a faster response time, etc. With a simple google search, I also found out that there are tons of API monitoring tools that could be useful for that.
 
-5. Which endpoints from the task could by publically cached?
+**5. Which endpoints from the task could by publically cached?**
 
 /auth/inventory endpoint can be cached to to allow for faster results when searching for the same product again.

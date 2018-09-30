@@ -220,7 +220,7 @@ newcode - string
 ## Questions
 **1. Please explain your choice of technologies.**
 
-To be honest, I have never done something like this before. I was learning while working on this task. As I am a huge fan of Python, I chose to develop using Python. Using my bestfriend google, I was able to understand as much as possible about REST, JWT, PSQL, tokens and much more in less than 2 days.
+To be honest, I have never done something like this before. I was learning while working on this task. As I am a huge fan of Python, I chose to develop using Python. Using my bestfriend google, I was able to understand as much as possible about REST, JWT, PSQL, tokens and much more in less than 2 days and I was able to develop this beauty. I am sure there might be a better and far more superior solution but with my limited time, this was the best solution.
 
 **2. What is the difference between PUT and POST methods?**
 
